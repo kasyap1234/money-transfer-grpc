@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v3.21.12
-// source: transfer.proto
+// source: proto/transfer.proto
 
 package transfer
 
@@ -203,5 +203,5 @@ var MoneyTransferService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "transfer.proto",
+	Metadata: "proto/transfer.proto",
 }

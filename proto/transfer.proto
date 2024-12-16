@@ -3,7 +3,7 @@ syntax = "proto3";
 package  transfer;
 
 
-option go_package = "github.com/kasyap1234/money-transfer-grpc/transfer";
+option go_package = "/transfer";
 
 // Account represents a financial account
 message Account {
