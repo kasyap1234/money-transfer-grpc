@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package  ;
+
+option go_package = "/transfer";
+
+
+// Account represents a financial account
+message Account {
+    string account_id = 1;
+    string owner_name = 2;
+    string account_type = 3;
+    double balance = 4;
+}
+
+// Transfer request representing a money movement transaction
+message TransferRequest {
+    string source_account_id = 1;
+    string destination_account_id = 2;
+    double amount = 3;
+    string transaction_id = 4;
+    string description = 5;
+}
+
+// Transfer response with detailed transaction status
+message TransferResponse {
+    enum Status {
+        PENDING = 0;
+        SUCCESSFUL = 1;
+        INSUFFICIENT_FUNDS = 2;
+        ACCOUNT_NOT_FOUND = 3;
+        INVALID_AMOUNT = 4;
+        SYSTEM_ERROR = 5;
+    }
+
+    Status status = 1;
+    string message = 2;
+    double new_source_balance = 3;
+    double new_destination_balance = 4;
+    string transaction_id = 5;
+    
+}
+
+// Validation request for pre-transfer checks
+message ValidationRequest {
+    string source_account_id = 1;
+    string destination_account_id = 2;
+    double amount = 3;
+}
+
+// Service definition for financial transactions
+service MoneyTransferService {
+    // Primary transfer method
+    rpc ExecuteTransfer(TransferRequest) returns (TransferResponse) {}
+
+    // Pre-transfer validation
+    rpc ValidateTransfer(ValidationRequest) returns (TransferResponse) {}
+
+    // Balance inquiry
+    rpc GetAccountBalance(Account) returns (Account) {}
+}
